@@ -1,7 +1,7 @@
 
 let accessToken;
 const clientId = '7d3f56b083c341258714ad1b721647d4';
-const redirectUri = 'https://mode-jammming.surge.sh/';
+const redirectUri = 'http://localhost:3000/';
 const spotifyUrl = `https://accounts.spotify.com/authorize?response_type=token&scope=playlist-modify-public&client_id=${clientId}&redirect_uri=${redirectUri}`;
 
 let Spotify = {
@@ -27,12 +27,16 @@ let Spotify = {
             this.getAccessToken();
             const searchUrl = `https://api.spotify.com/v1/search?type=track&q=${term}`;
             const requestHeaders = {headers: {Authorization: `Bearer ${accessToken}`} };
-            return fetch(searchUrl, requestHeaders)
+            return fetch(searchUrl, requestHeaders).then(response => {
+                    return response.json();
+                    })
             .then(jsonResponse => {
                 console.log(searchUrl + requestHeaders);
+                if (!jsonResponse.tracks) {
+                return [];
+      }
                 if(jsonResponse) {
-                    console.log(jsonResponse);
-                    console.log(jsonResponse.items);
+                    console.log(jsonResponse); 
                     return jsonResponse.tracks.items.map(track => {
                         return {
                             id: track.id,
@@ -42,7 +46,8 @@ let Spotify = {
                             uri: track.uri 
                         };
                     });
-                } else { return; }
+                }
+                 else { return; }
             });
         },
 

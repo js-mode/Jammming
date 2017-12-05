@@ -75,11 +75,11 @@ constructor(props) {
       <div className="App">
         <SearchBar  
                     onSearch={this.search} />
-          <div className="App-PlayList">
+          <div className="App-playList">
               <SearchResults 
                     searchResults={this.state.searchResults}
                     onAdd={this.addTrack}/>  
-              <PlayList  className="App-PlayList"
+              <PlayList 
                     playListName={this.state.playListName} 
                     onRemove={this.removeTrack}
                     onNameChange={this.updatePlayListName}
