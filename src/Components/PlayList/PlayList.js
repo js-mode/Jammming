@@ -6,8 +6,7 @@ class PlayList extends React.Component {
     constructor(props) {
         super(props);
         //Bind the handle name change
- //   this.onNameChange = this.onNameChange.bind(this); //correct?
-        this.handleNameChange = this.handleNameChange.bind(this); //correct?
+         this.handleNameChange = this.handleNameChange.bind(this); //correct?
     }
 
     //Method to handle name change
@@ -23,6 +22,7 @@ class PlayList extends React.Component {
                     value={this.props.name}
                     defaultValue={'New PlayList'}/>
             <TrackList 
+                isRemoval={true}
                 onRemove={this.props.onRemove}
                 tracks={this.props.playListTracks} />
             <a className="PlayList-save" onClick={this.props.onSave}>SAVE TO SPOTIFY</a>
@@ -32,6 +32,5 @@ class PlayList extends React.Component {
 }
 
 export default PlayList;
+    
 
-
-//<!-- When a user requests data from Spotify, the JSON response will include a set of song tracks. Each track will contain a field for name, artist, and album. For each track in the results list, your Jammming web app will display the song name, artist, and album. -->
