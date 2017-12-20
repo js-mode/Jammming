@@ -63,18 +63,18 @@ let Spotify = {
             let userId;
             let playListId;
                 // Make a request to retrieve user id
-            fetch(userUrl, { headers: headers })
+            return fetch(userUrl, { headers: headers })
         // Convert the response to json
             .then(response => response.json())
+
+           // userId = jsonResponse.id should be inside the {}
             
+
         // Set the userId to the returned Id
-            .then(jsonResponse => userId = jsonResponse.id)
-            
-        // Create the playlist on Spotify
-            .then(() => {
+            .then(jsonResponse => { userId = jsonResponse.id 
                 const createPlayListUrl = `https://api.spotify.com/v1/users/${userId}/playlists`;
         // Make a post request and create a playlist with the given name
-                fetch(createPlayListUrl, {
+                return fetch(createPlayListUrl, {
                 method: 'POST',
                 headers: headers,
                 body: JSON.stringify({
@@ -91,7 +91,7 @@ let Spotify = {
           const addPlayListTracksUrl = `https://api.spotify.com/v1/users/${userId}/playlists/${playListId}/tracks`;
           // make a post request with an array of uris to be added
           // to the playlist
-                fetch(addPlayListTracksUrl, {
+                return fetch(addPlayListTracksUrl, {
                     method: 'POST',
                     headers: headers,
                     body: JSON.stringify({
